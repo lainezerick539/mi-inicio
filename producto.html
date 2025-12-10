@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Producto</title>
+  <link rel="stylesheet" href="producto.css">
+  <style>
+    .preview-wrapper{margin-top:10px}
+    .preview-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .preview-item{width:90px;height:90px;position:relative}
+    .preview-item img{width:100%;height:100%;object-fit:cover;border-radius:8px;border:1px solid #374151}
+    .remove-btn{
+      position:absolute;top:-6px;right:-6px;
+      background:#ef4444;color:white;border:none;
+      width:22px;height:22px;border-radius:50%;
+      font-size:14px;cursor:pointer;display:flex;
+      align-items:center;justify-content:center
+    }
+    .preview-count{font-size:.9rem;color:#9ca3af;margin-top:4px}
+    .btn-back{
+      display:inline-block;
+      margin-bottom:18px;
+      background:#2563eb;
+      color:white;
+      padding:10px 16px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+    }
+    .btn-back:hover{background:#1d4ed8}
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+
+  <a href="menu.php" class="btn-back">← Regresar al menú</a>
+
+  <h2>Agregar Producto</h2>
+
+  <form id="productoForm" enctype="multipart/form-data">
+
+      <label for="nombre">Nombre del producto:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+      <label for="precio">Precio (USD):</label>
+      <input type="number" id="precio" name="precio" step="0.01" required>
+
+      <label for="ubicacion">Ubicación:</label>
+      <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. San Miguel, El Salvador" required>
+
+      <label for="estado">Estado:</label>
+      <select id="estado" name="estado" required>
+        <option value="">Selecciona una opción</option>
+        <option value="Nuevo">Nuevo</option>
+        <option value="Usado - Buen estado" selected>Usado - Buen estado</option>
+        <option value="Usado - Aceptable">Usado - Aceptable</option>
+      </select>
+
+      <label for="imagen">Imágenes del producto (máx 10):</label>
+      <input type="file" id="imagen" accept="image/*" multiple>
+
+      <div class="preview-wrapper">
+        <div id="preview-count" class="preview-count"></div>
+        <div id="preview-grid" class="preview-grid"></div>
+      </div>
+
+      <input type="submit" value="Guardar producto">
+
+  </form>
+
+  <div id="mensaje"></div>
+</div>
+
+<script>
+let imagenesFinales = [];
+
+const inputImagen = document.getElementById('imagen');
+const previewGrid = document.getElementById('preview-grid');
+const previewCount = document.getElementById('preview-count');
+
+inputImagen.addEventListener('change', function() {
+  const nuevosArchivos = Array.from(this.files);
+  if (imagenesFinales.length + nuevosArchivos.length > 10) {
+    alert('Máximo 10 imágenes.');
+    this.value = '';
+    return;
+  }
+  nuevosArchivos.forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    imagenesFinales.push(file);
+  });
+  this.value = '';
+  renderPreview();
+});
+
+function renderPreview() {
+  previewGrid.innerHTML = '';
+  previewCount.textContent = imagenesFinales.length + ' imagen(es) seleccionada(s)';
+  imagenesFinales.forEach((file, index) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const div = document.createElement('div');
+      div.className = "preview-item";
+      div.innerHTML = `
+        <img src="${e.target.result}">
+        <button class="remove-btn" data-index="${index}">×</button>
+      `;
+      previewGrid.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+previewGrid.addEventListener('click', function(e) {
+  if (e.target.classList.contains('remove-btn')) {
+    const index = parseInt(e.target.getAttribute('data-index'));
+    imagenesFinales.splice(index, 1);
+    renderPreview();
+  }
+});
+
+document.getElementById('productoForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const mensaje = document.getElementById('mensaje');
+  const submitButton = this.querySelector('input[type="submit"]');
+  mensaje.textContent = '';
+  mensaje.className = '';
+
+  if (imagenesFinales.length === 0) {
+    mensaje.textContent = 'Debes seleccionar al menos una imagen.';
+    mensaje.classList.add('error');
+    return;
+  }
+
+  submitButton.value = 'Guardando...';
+  submitButton.disabled = true;
+
+  const formData = new FormData();
+  formData.append("nombre", document.getElementById("nombre").value);
+  formData.append("descripcion", document.getElementById("descripcion").value);
+  formData.append("precio", document.getElementById("precio").value);
+  formData.append("ubicacion", document.getElementById("ubicacion").value);
+  formData.append("estado", document.getElementById("estado").value);
+
+  imagenesFinales.forEach(file => formData.append("imagenes[]", file));
+
+  try {
+    const res = await fetch('guardar_producto.php', { method:'POST', body:formData });
+    const data = await res.json();
+    if (data.success) {
+      window.location.href = 'menu.php';
+    } else {
+      mensaje.textContent = data.error || 'Ocurrió un error.';
+      mensaje.classList.add('error');
+    }
+  } catch (err) {
+    mensaje.textContent = 'Error de conexión.';
+    mensaje.classList.add('error');
+  }
+
+  submitButton.value = 'Guardar producto';
+  submitButton.disabled = false;
+});
+</script>
+
+<script src="theme-toggle.js"></script>
+
+<script>
+(async () => {
+  const tieneSesionPHP = await fetch("verificar_sesion.php")
+    .then(r => r.json())
+    .then(d => d.loggedIn)
+    .catch(() => false);
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" || tieneSesionPHP;
+  if (!isLoggedIn) {
+    window.location.replace("login.html");
+  }
+})();
+</script>
+
+</body>
+</html>

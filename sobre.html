@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre ShopGo</title>
+  <meta name="description" content="Conoce más sobre la empresa ShopGo y su propósito en el mundo digital." />
+  <link rel="stylesheet" href="sobre.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="encabezado">
+    <div class="contenedor barra-navegacion">
+      <a href="index.html" class="marca" style="display: flex; align-items: center; gap: 8px;">
+        <img src="logo.png" alt="Logo ShopGo" style="width: 70px; height: 70px;">
+      </a>
+    </div>
+  </header>
+
+  <section class="portada">
+    <div class="contenedor portada-interna">
+      <h1>Sobre ShopGo</h1>
+      <p class="destacado">Innovación, confianza y servicio al alcance de todos.</p>
+    </div>
+  </section>
+
+  <main class="contenedor" style="padding: 2rem 0;">
+    <section class="tarjeta">
+      <h3>¿Quiénes somos?</h3>
+      <p>ShopGo es una empresa dedicada a ofrecer soluciones tecnológicas y de comercio electrónico, ayudando a personas y negocios a digitalizar sus productos y servicios de forma segura y eficiente.</p>
+    </section>
+
+    <section class="tarjeta">
+      <h3>Nuestra misión</h3>
+      <p>Brindar confianza, seguridad y facilidad a cada usuario al realizar sus compras en línea, garantizando una experiencia moderna y accesible.</p>
+    </section>
+
+    <section class="tarjeta">
+      <h3>Nuestra visión</h3>
+      <p>Convertirnos en una plataforma líder en el comercio digital de Latinoamérica, impulsando la transformación digital y la innovación en cada cliente.</p>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie-interno">
+      © <span id="year"></span> ShopGo — Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  });
+</script>
+
+
+</body>
+</html>

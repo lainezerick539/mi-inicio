@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil de Usuario | ShopGo</title>
+    <meta name="description" content="Gestiona tu información personal, seguridad y preferencias en ShopGo." />
+    <link rel="stylesheet" href="perfil.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8uRj8WpSjQ9B5v9oW7F2J/y2Q6TfFw6F5Q5fG8gM2vL3u5B/tG1jS/qQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <a href="#contenido-principal" class="saltar-contenido">Saltar al contenido principal</a>
+
+    <header class="encabezado">
+        <div class="contenedor barra-navegacion">
+            <a href="menu.php" class="marca" aria-label="Inicio ShopGo" style="display: flex; align-items: center; gap: 8px;">
+                <img src="logo.png" alt="Logo ShopGo" style="width: 100px; height: 100px;" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3182CE/FFFFFF?text=SG';">
+            </a>
+            <nav class="navegacion" aria-label="Principal">
+                <a href="sobre.html">Sobre nosotros</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="contacto.html">Contacto</a> 
+                <a href="perfil.html" aria-current="page">Perfil</a> 
+                
+                <button id="theme-toggle" aria-label="Alternar modo oscuro y claro">
+                    <span id="theme-icon">🌙</span> 
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="portada">
+        <div class="contenedor portada-interna">
+            <h1>Ajustes de Perfil</h1>
+            <p>Gestiona tu cuenta, preferencias y actividad en ShopGo.</p>
+        </div>
+    </section>
+
+    <main class="contenedor perfil-layout" id="contenido-principal">
+        
+        <aside class="perfil-sidebar">
+            <h2 class="perfil-nombre" id="user-display-name" style="text-align: center; margin-bottom: 1.5rem;">Cargando...</h2>
+            
+            <nav class="nav-links-container" aria-label="Configuración de Perfil">
+                <a href="#info-general" class="nav-link active" data-target="info-general" aria-current="true"><i class="fa-solid fa-user"></i> Información General</a>
+                <a href="#seguridad" class="nav-link" data-target="seguridad"><i class="fa-solid fa-shield-halved"></i> Seguridad y Cuenta</a>
+                <a href="#preferencias" class="nav-link" data-target="preferencias"><i class="fa-solid fa-gear"></i> Preferencias</a>
+                <a href="#actividad" class="nav-link" data-target="actividad"><i class="fa-solid fa-list-check"></i> Actividad</a>
+                <a href="#privacidad" class="nav-link" data-target="privacidad"><i class="fa-solid fa-lock"></i> Privacidad y Datos</a>
+            </nav>
+            <button class="boton boton-salir" onclick="window.location.href='logout.php';">Cerrar Sesión</button>
+        </aside>
+
+        <div class="perfil-contenido">
+
+            <div id="info-general" class="perfil-panel tarjeta active">
+                <h2>Información General</h2>
+                <div class="profile-avatar-container">
+                    <img src="https://placehold.co/100x100/2b6cb0/ffffff?text=AV" alt="Avatar de Usuario" class="profile-avatar" id="current-avatar">
+                    <input type="file" id="avatar-upload" hidden accept="image/*">
+                    <label for="avatar-upload" class="boton" style="margin-top: 1rem;">Cambiar Foto</label>
+                </div>
+
+                <form id="form-update-info">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Nombre de Usuario</label>
+                        <input type="text" id="username" name="username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico Principal</label>
+                        <input type="email" id="email" name="correo_electronico" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono de Contacto</label>
+                        <input type="tel" id="telefono" name="telefono" />
+                    </div>
+                    <div class="form-group">
+                        <label for="biografia">Biografía / Descripción Personal</label>
+                        <textarea id="biografia" name="biografia" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="boton">Guardar Cambios</button>
+                </form>
+            </div>
+
+            <div id="seguridad" class="perfil-panel tarjeta">
+                <h2>Seguridad y Gestión de Cuenta</h2>
+
+                <section>
+                    <h3>Cambiar Contraseña</h3>
+                    <form id="form-change-password">
+                        <div class="form-group">
+                            <label for="current-password">Contraseña Actual</label>
+                            <input type="password" id="current-password" name="current_password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Nueva Contraseña</label>
+                            <input type="password" id="new-password" name="new_password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirmar Nueva Contraseña</label>
+                            <input type="password" id="confirm-password" name="confirm_password" required />
+                        </div>
+                        <button type="submit" class="boton">Actualizar Contraseña</button>
+                    </form>
+                </section>
+
+                <hr style="margin: 2rem 0; border-color: var(--border-color);">
+
+                <section>
+                    <h3>Configuración de Correo Electrónico</h3>
+                    <form id="form-change-email">
+                        <p>Tu correo actual es: <strong id="current-email-display">andrea.valdez@shopgo.com</strong></p>
+                        <div class="form-group">
+                            <label for="new-email">Nuevo Correo Electrónico</label>
+                            <input type="email" id="new-email" name="new_email" required />
+                        </div>
+                        <button type="submit" class="boton">Actualizar Correo</button>
+                    </form>
+                </section>
+                
+                <hr style="margin: 2rem 0; border-color: var(--border-color);">
+
+                <section>
+                    <h3>Dispositivos Conectados</h3>
+                    <p>Cierra sesión en cualquier dispositivo que no reconozcas.</p>
+                    <div id="sesiones-activas-list">
+                        <div class="list-item-action">
+                            <p><i class="fa-solid fa-laptop"></i> Chrome en Windows (Actual)</p>
+                            <button class="boton" style="background: var(--muted); padding: 0.4rem 0.8rem;">Cerrar Sesión</button>
+                        </div>
+                        <div class="list-item-action">
+                            <p><i class="fa-solid fa-mobile-screen-button"></i> App Móvil en Android</p>
+                            <button class="boton" style="background: var(--muted); padding: 0.4rem 0.8rem;">Cerrar Sesión</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+            <div id="preferencias" class="perfil-panel tarjeta">
+                <h2>Preferencias de la Interfaz</h2>
+        
+                <form id="form-update-preferences">
+                    <div class="list-item-action">
+                        <p><i class="fa-solid fa-language"></i> Idioma Preferido</p>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <select id="idioma" name="idioma">
+                                <option value="es" selected>Español (ES)</option>
+                                <option value="en">Inglés (EN)</option>
+                                <option value="pt">Portugués (PT)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="list-item-action">
+                        <p><i class="fa-solid fa-circle-half-stroke"></i> Tema de Color</p>
+                        <button type="button" id="theme-toggle-panel" class="boton" style="padding: 0.5rem 1rem;">
+                            Alternar Modo (<span id="theme-status">Claro</span>)
+                        </button>
+                    </div>
+                    <button type="submit" class="boton" style="margin-top: 1.5rem;">Guardar Preferencias</button>
+                </form>
+            </div>
+
+            <div id="actividad" class="perfil-panel tarjeta">
+                <h2>Historial de Actividad</h2>
+
+                <section>
+                    <h3>Historial de Compras/Pedidos</h3>
+                    <div id="historial-compras-list" style="border: 1px solid var(--border-color); border-radius: 8px;">
+                        <p class="text-muted" id="no-compras" style="padding: 1rem;">Cargando historial...</p>
+                    </div>
+                </section>
+
+                <hr style="margin: 2rem 0; border-color: var(--border-color);">
+
+                <section>
+                    <h3>Favoritos y Artículos Guardados</h3>
+
+                    <div id="favoritos-list" class="rejilla" style="padding: 0;">
+                        <p class="text-muted" id="no-favoritos" style="padding: 1rem;">Cargando favoritos...</p>
+                    </div>
+                </section>
+            </div>
+
+            <div id="privacidad" class="perfil-panel tarjeta">
+                <h2>Gestión de Privacidad y Datos</h2>
+                
+                <section>
+                    <h3>Exportar tus Datos</h3>
+                    <p>Puedes solicitar una copia de todos tus datos personales. Los datos se prepararán en formato JSON y se te enviarán por correo electrónico.</p>
+                    <button class="boton" style="background: #48bb78;" onclick="alert('Solicitando descarga de datos...');"><i class="fa-solid fa-download"></i> Solicitar Copia de Datos</button>
+                </section>
+
+                <hr style="margin: 2rem 0; border-color: var(--border-color);">
+
+                <section>
+                    <h3>Eliminación de Cuenta</h3>
+                    <p style="color: var(--muted);"> Advertencia: Esta acción es permanente. Al eliminar tu cuenta, se borrarán todos tus datos de forma irreversible.</p>
+                    <button class="boton" style="background: #e53e3e;" onclick="alert('Funcionalidad de eliminación pendiente de implementación.');">Eliminar mi Cuenta Permanentemente</button>
+                </section>
+            </div>
+
+        </div> 
+
+    </main>
+
+    <footer class="pie">
+        <div class="contenedor pie-interno">© <span id="year"></span> ShopGo. Todos los derechos reservados.</div>
+    </footer>
+
+    <div id="status-message" aria-live="polite"></div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="theme-toggle.js"></script>
+    <script src="perfil.js"></script>
+</body>
+</html>

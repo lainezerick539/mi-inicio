@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #1b1c26, #0f1015 70%);
+  overflow: hidden;
+}
+.login-box {
+  background: rgba(30, 30, 40, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 45px 40px;
+  width: 340px;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.login-box h2 {
+  text-align: left;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 25px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0 20px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+.login-box input:focus {
+  box-shadow: 0 0 0 2px #6a5acd;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.login-box input[type="submit"],
+.login-box .register-btn {
+  flex: 1;
+  padding: 12px 15px;
+  background: linear-gradient(90deg, #6a5acd, #9370db);
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  text-align: center;
+}
+.login-box input[type="submit"]:hover,
+.login-box .register-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(147, 112, 219, 0.7);
+}
+.google-btn {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+.extra-links {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #bbb;
+}
+.extra-links a {
+  color: #9370db;
+  text-decoration: none;
+}
+.extra-links a:hover {
+  text-decoration: underline;
+}
+.glow {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #6a5acd55 0%, transparent 70%);
+  filter: blur(80px);
+  animation: float 6s ease-in-out infinite alternate;
+}
+@keyframes float {
+  from { transform: translate(0, 0); }
+  to { transform: translate(30px, 40px); }
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultados de búsqueda - ShopGo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Resultados de búsqueda</h1>
+  <div id="resultados"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query")?.toLowerCase() || "";
+
+    const contenedor = document.getElementById("resultados");
+
+    const productos = [
+      { nombre: "Camisa azul", precio: 19.99 },
+      { nombre: "Zapatos deportivos", precio: 49.99 },
+      { nombre: "Laptop HP", precio: 499.99 },
+      { nombre: "Camisa blanca", precio: 17.99 }
+    ];
+
+   
+    const filtrados = productos.filter(p =>
+      p.nombre.toLowerCase().includes(query)
+    );
+
+    if (filtrados.length > 0) {
+      contenedor.innerHTML = filtrados.map(p =>
+        `<div class="producto">
+          <h3>${p.nombre}</h3>
+          <p>$${p.precio}</p>
+        </div>`
+      ).join("");
+    } else {
+      contenedor.innerHTML = `<p>No se encontraron resultados para "<strong>${query}</strong>"</p>`;
+    }
+  </script>
+</body>
+</html>

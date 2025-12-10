@@ -1,0 +1,52 @@
+* {margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+body {
+  height:100vh;display:flex;justify-content:center;align-items:center;
+  background:radial-gradient(circle at top left,#1b1c26,#0f1015 70%);
+  color:#fff;overflow:hidden;
+}
+.card {
+  background:rgba(30,30,40,0.85);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;
+  padding:45px 40px;
+  width:340px;text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+h2 {margin-bottom:25px;font-weight:600;}
+input[type="email"] {
+  width:100%;padding:12px 15px;margin-bottom:20px;border:none;
+  border-radius:10px;background-color:rgba(255,255,255,0.08);
+  color:#fff;font-size:15px;outline:none;transition:0.3s;
+}
+input[type="email"]:focus {
+  box-shadow:0 0 0 2px #6a5acd;
+  background-color:rgba(255,255,255,0.12);
+}
+input[type="submit"] {
+  width:100%;padding:12px 15px;
+  background:linear-gradient(90deg,#6a5acd,#9370db);
+  color:white;font-size:15px;border:none;border-radius:10px;
+  cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;
+}
+input[type="submit"]:hover {
+  transform:scale(1.03);
+  box-shadow:0 0 12px rgba(147,112,219,0.7);
+}
+.msg {
+  margin-top:20px;
+  padding:10px;
+  border-radius:8px;
+  display:none;
+  font-size:14px;
+}
+.success {
+  background:rgba(0,255,0,0.1);
+  color:#90ee90;
+  border:1px solid rgba(0,255,0,0.3);
+}
+.error {
+  background:rgba(255,85,85,0.1);
+  color:#ff6666;
+  border:1px solid rgba(255,85,85,0.3);
+}

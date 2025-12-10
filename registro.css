@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #1b1c26, #0f1015 70%);
+  overflow: hidden;
+  color: #fff;
+}
+.registro-card {
+  background: rgba(30, 30, 40, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 45px 40px;
+  width: 340px;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+  text-align: center;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.registro-card h2 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.user-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 25px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+}
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group input[type="tel"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+.input-group input:focus {
+  box-shadow: 0 0 0 2px #6a5acd;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+input[type="submit"] {
+  width: 100%;
+  padding: 12px 15px;
+  background: linear-gradient(90deg, #6a5acd, #9370db);
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 15px;
+}
+input[type="submit"]:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(147, 112, 219, 0.7);
+}
+.google-btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.extra-links {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #bbb;
+}
+.extra-links a {
+  color: #9370db;
+  text-decoration: none;
+}
+.extra-links a:hover {
+  text-decoration: underline;
+}
+.glow {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #6a5acd55 0%, transparent 70%);
+  filter: blur(80px);
+  animation: float 6s ease-in-out infinite alternate;
+}
+@keyframes float {
+  from { transform: translate(0, 0); }
+  to { transform: translate(30px, 40px); }
+}

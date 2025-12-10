@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Servicios - NovaTech</title>
+  <meta name="description" content="Servicios de NovaTech: desarrollo de software, consultoría y cloud." />
+  <meta name="theme-color" content="#2b6cb0" />
+  <link rel="stylesheet" href="sobre.css" />
+</head>
+<body>
+  <a class="saltar-contenido" href="#contenido-principal">Saltar al contenido</a>
+  <header class="encabezado">
+    <div class="contenedor barra-navegacion">
+      <a href="menu.php" class="marca" aria-label="Inicio ShopGo" style="display: flex; align-items: center; gap: 8px;">
+        <img src="logo.jpg" alt="Logo ShopGo" style="width: 100px; height: 100px;">
+      </a>
+      <nav class="navegacion" aria-label="Principal">
+        <a href="sobre.html">Sobre nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal" class="contenedor" style="padding: 2rem 0;">
+    <h1>Servicios</h1>
+    <div class="rejilla">
+      <section class="tarjeta">
+        <h3>Desarrollo de software</h3>
+        <p>Aplicaciones web y móviles, APIs, sistemas backend y productos digitales de punta a punta.</p>
+      </section>
+      <section class="tarjeta">
+        <h3>Consultoría tecnológica</h3>
+        <p>Arquitecturas escalables, estrategia de datos, seguridad y automatización de procesos.</p>
+      </section>
+      <section class="tarjeta">
+        <h3>Cloud y DevOps</h3>
+        <p>CI/CD, contenedores, orquestación, infraestructura como código y observabilidad.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie-interno">© <span id="year"></span> ShopGo.</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const here = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.navegacion a').forEach(a => {
+      if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page');
+    });
+  </script>
+</body>
+</html>
